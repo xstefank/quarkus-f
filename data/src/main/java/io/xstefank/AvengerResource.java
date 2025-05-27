@@ -48,4 +48,10 @@ public class AvengerResource {
     public Avenger insert(Avenger avenger) {
         return avengerRepository.insert(avenger);
     }
+
+    @POST
+    @Path("/upsert")
+    public void upsert(Avenger avenger) {
+        avengerRepository.upsert(avenger);
+    }
 }

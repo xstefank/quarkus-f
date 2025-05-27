@@ -34,5 +34,7 @@ public interface AvengerRepository {
 
     StatelessSession session();
 
-
+    default void upsert(Avenger avenger) {
+        session().upsert(avenger);
+    }
 }
