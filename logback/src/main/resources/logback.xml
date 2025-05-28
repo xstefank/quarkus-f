@@ -1,0 +1,38 @@
+<configuration scan="true" scanPeriod="3 seconds">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+      <providers>
+        <timestamp/>
+        <version/>
+        <message/>
+        <loggerName/>
+        <threadName/>
+        <logLevel/>
+        <mdc/>
+        <arguments/>
+        <pattern>
+          <pattern>
+            {
+            "myField": {
+            "mySubField": "%mdc{abc}"
+            },
+            "myField2": "%mdc{abc}"
+            }
+          </pattern>
+          <omitEmptyFields>true</omitEmptyFields>
+        </pattern>
+        <logstashMarkers/>
+      </providers>
+    </encoder>
+  </appender>
+
+<!--  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+<!--    <encoder>-->
+<!--      <pattern>-&#45;&#45; %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>-->
+<!--    </encoder>-->
+<!--  </appender>-->
+
+  <root level="debug">
+    <appender-ref ref="STDOUT" />
+  </root>
+</configuration>
