@@ -1,29 +1,39 @@
 package io.xstefank;
 
-import io.quarkus.logging.Log;
+import io.quarkus.cache.Cache;
+import io.quarkus.cache.CacheName;
+import io.quarkus.cache.CaffeineCache;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
 
-@Path("/")
+import java.util.Set;
+
+@Path("/caffeine")
 public class CacheResource {
 
     @Inject
-    CaffeineCache caffeineCache;
+    MyCache caffeineCache;
 
     @GET
-    @Path("/caffeine/{id}")
+    @Path("/{id}")
     public String getCaffeineCache(int id) {
         return caffeineCache.getCache(id);
     }
 
     @GET
-    @Path("/caffeine/invalidate")
+    @Path("/invalidate")
     public void invalidateCaffeine() {
         caffeineCache.invalidateCache();
     }
 
 
+    @CacheName("caffeine-cache")
+    Cache cache;
+
+    @GET
+    @Path("/all-keys")
+    public Set<Object> getAllCacheKeys() {
+        return cache.as(CaffeineCache.class).keySet();
+    }
 }

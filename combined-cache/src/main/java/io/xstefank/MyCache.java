@@ -6,7 +6,7 @@ import io.quarkus.logging.Log;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class CaffeineCache {
+public class MyCache {
 
     @CacheResult(cacheName = "caffeine-cache")
     public String getCache(int i) {
